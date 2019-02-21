@@ -1,0 +1,64 @@
+use db_s6;
+
+create table khang_s(
+   sid varchar(3) PRIMARY KEY,
+   sname text NOT NULL,
+   status smallint,
+   city text);
+
+create table khang_p(
+    pid varchar(3) UNIQUE NOT NULL,
+   pname text NOT NULL,
+   color text,
+   weight smallint,
+   city text);
+
+create table khang_sp(
+   pid varchar(3) UNIQUE NOT NULL,
+   pname text NOT NULL,
+   weight smallint,
+   city text);
+
+create table khang_films(
+    code char(5) PRIMARY KEY,
+   title text NOT NULL,
+   date_prod date DEFAULT '2000/01/01');
+
+create table khang_t1(
+   id smallint PRIMARY KEY,
+   name text);
+
+create table khang_t2(
+  code smallint PRIMARY KEY,
+  cname text);
+
+ALTER TABLE khang_films ADD COLUMN nb int;
+ALTER TABLE khang_films DROP COLUMN nb;
+ALTER TABLE khang_films CHANGE title title varchar(30);
+
+INSERT INTO khang_s VALUES('S01', 'Smith', 20, 'London');
+INSERT INTO khang_s VALUES('S02', 'Jones', 20, 'Paris');
+INSERT INTO khang_s VALUES('S03', 'Blacke', 30, 'Paris');
+
+INSERT INTO khang_p VALUES('P01', 'Nut', 'red', 12, 'London');
+INSERT INTO khang_p VALUES('P02', 'Bolt', 'green', 17, 'Paris');
+INSERT INTO khang_p VALUES('P03', 'Screw', 'blue', 17, 'Roma');
+INSERT INTO khang_p VALUES('P04', 'Screw', 'red', 14, 'London');
+
+INSERT INTO khang_sp VALUES('S01', 'P01', 300);
+INSERT INTO khang_sp VALUES('S01', 'P02', 200);
+INSERT INTO khang_sp VALUES('S01', 'P03', 400);
+INSERT INTO khang_sp VALUES('S02', 'P01', 300);
+INSERT INTO khang_sp VALUES('S02', 'P01', 400);
+INSERT INTO khang_sp VALUES('S03', 'P02', 200);
+
+INSERT INTO khang_films VALUES('00001', 'Anh Huynh Xa Dieu', '1990/12/07');
+INSERT INTO khang_films VALUES('00002', 'Than Dieu Dai Hiep', '1991/10/22');
+INSERT INTO khang_films VALUES('00013', 'Vo My Nuong', '1999/10/15');
+
+DELETE FROM khang_films;
+DELETE FROM khang_films where code = '00013';
+
+UPDATE khang_films
+SET title = 'Co Gai Do Long'
+WHERE code = '00001';
